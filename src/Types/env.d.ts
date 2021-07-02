@@ -1,7 +1,9 @@
 // Global types
 declare namespace NodeJS {
   export interface ProcessEnv {
-    MONGO_URI: string;
+    SQL_Username: string;
+    SQL_Password: string;
+    SQL_Database: string;
     SECRET: string;
   }
 }

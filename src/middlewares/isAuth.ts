@@ -1,8 +1,7 @@
-// MiddleWare
 import { Request } from "express";
 import { Strategy as JWTStrategy, VerifiedCallback } from "passport-jwt";
 import passport from "passport";
-import User from "../models/User";
+import { User } from "../entities/User";
 
 const cookieExtractor = (req: Request) => {
   let token = null;
@@ -20,7 +19,7 @@ passport.use(
     },
     async (payload, done: VerifiedCallback) => {
       try {
-        const user = await User.findById(payload.sub);
+        const user = await User.findOne(payload.sub);
 
         if (user) {
           return done(null, user);

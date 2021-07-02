@@ -5,5 +5,9 @@
 ```sh
 npm run build
 
-npm start
+npm run dev
+
+## Migrations
+npx ts-node ./node_modules/.bin/typeorm migration:generate -n finalDB
+
 ```

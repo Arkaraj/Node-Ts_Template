@@ -1,20 +1,23 @@
-// Sql or MongoDB connections
-import { connect } from "mongoose";
+import { Connection, createConnection } from "typeorm";
 
-(function () {
-  connect(
-    `${process.env.MONGO_URI}`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    },
-    (err) => {
-      if (err) {
-        console.log(err.message);
-      } else {
-        console.log("Successfully Connected to Database!");
-      }
-    }
-  );
-})();
+let connection: Connection | null = null;
+
+const main = async () => {
+  connection = await createConnection()
+    .then(async (connect) => {
+      // await connect.runMigrations();
+
+      console.log(`Connected to DB sucessfully ${connect.name}`);
+
+      return connect;
+    })
+    .catch((err) => {
+      console.log(`Error Occured in connecting to the DB ${err}`);
+      return null;
+    });
+  return connection;
+};
+
+main();
+
+export default connection;
