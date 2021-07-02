@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "./logger/morgan";
 require("dotenv-save").config();
+import cookieParser from "cookie-parser";
 
 const app = express();
 app.use(express.json());
@@ -10,6 +11,7 @@ app.use(cors({ origin: "*" }));
 // Connect to database here
 
 // use all the middlewires
+app.use(cookieParser());
 
 // Logging
 app.use(morgan);
