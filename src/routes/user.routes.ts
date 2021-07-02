@@ -1,9 +1,18 @@
 import express from "express";
 const router = express.Router();
+import passport from "passport";
+import "../middlewares/isAuth";
 
-// Call middleware here
+const auth = passport.authenticate("jwt", { session: false });
+
 import userController from "../controllers/user.controllers";
 
-router.get("/", userController.getAllUsers);
+router.get("/", auth, userController.getUserProfile);
+
+router.post("/register", userController.registerUser);
+
+router.post("/login", userController.loginUser);
+
+router.delete("/logout", auth, userController.logoutUser);
 
 export default router;

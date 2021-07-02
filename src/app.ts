@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 
 // Connect to database here
+import "./config/connection";
 
 // use all the middlewires
 app.use(cookieParser());
@@ -24,6 +25,10 @@ app.use("/api/users", userRoute);
 
 app.get("/", (_req, res) => {
   res.send("Node ts Template");
+});
+
+app.get("/api", (_req, res) => {
+  res.send("Routes: ");
 });
 
 const port = process.env.PORT || 3002;
